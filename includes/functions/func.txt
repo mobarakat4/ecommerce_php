@@ -1,0 +1,12 @@
+1- get_title()// for choose title to the page 
+2- check_select()// for check if item exist
+2- check_selectwithket()// for check if item exist with key different from select
+2- check_selectwithket()// for check if item exist with key different from select()not important#
+3-select()//select all rows in one table
+4-selectonerow //selcet one row in table
+5-selectonecolwithket//select one row using key 
+6-redirect() redirect after secondes with messange
+7-redirectback()// redirect immediately
+8-countitems() //for count items in one table
+9-countitmeswhere() //count where
+10-selectlatest() //select latest items
