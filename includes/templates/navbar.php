@@ -10,7 +10,7 @@
         <li class="nav-item"><a class="nav-link" href="categories.php"><?php echo lang('categories');?></a></li>
         <li class="nav-item"><a class="nav-link" href="items.php"><?php echo lang('items');?></a></li>
         <li class="nav-item"><a class="nav-link" href="members.php"><?php echo lang('members');?></a></li>
-        <li class="nav-item"><a class="nav-link" href="#"><?php echo lang('comments');?></a></li>
+        <li class="nav-item"><a class="nav-link" href="comments.php"><?php echo lang('comments');?></a></li>
         <li class="nav-item"><a class="nav-link" href="#"><?php echo lang('stats');?></a></li>
         <li class="nav-item"><a class="nav-link" href="#"><?php echo lang('logs');?></a></li>
         

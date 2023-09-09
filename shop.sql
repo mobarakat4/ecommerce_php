@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 02, 2023 at 09:01 PM
+-- Generation Time: Sep 09, 2023 at 12:47 PM
 -- Server version: 10.1.29-MariaDB
 -- PHP Version: 7.1.12
 
@@ -55,6 +55,31 @@ INSERT INTO `cat` (`id`, `name`, `description`, `ordering`, `visible`, `allow_co
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `comments`
+--
+
+CREATE TABLE `comments` (
+  `id` int(11) NOT NULL,
+  `comment` text NOT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT '0',
+  `date` date NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `item_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `comments`
+--
+
+INSERT INTO `comments` (`id`, `comment`, `status`, `date`, `user_id`, `item_id`) VALUES
+(1, 'this is first comment', 0, '2023-09-06', 15, 11),
+(2, 'ljlkjklk', 0, '2023-09-07', 18, 5),
+(4, 'lllll', 0, '2023-09-06', 15, 11),
+(5, 'test', 0, '2023-09-07', 13, 10);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `items`
 --
 
@@ -78,7 +103,7 @@ CREATE TABLE `items` (
 --
 
 INSERT INTO `items` (`id`, `name`, `description`, `price`, `date`, `country_made`, `image`, `status`, `rating`, `cat_id`, `member_id`, `approve`) VALUES
-(5, 'playstation', 'for games', '8000', '2023-09-02', 'China', NULL, '1', NULL, 2, 1, 1),
+(5, 'playstation', 'for games', '8000', '2023-09-02', 'China', NULL, '1', NULL, 2, 1, 0),
 (6, 'girl toy', ' toy for girls', '150', '2023-09-02', 'USA', NULL, '3', NULL, 4, 17, 0),
 (8, 'sofa', 'sofa for sitting room', '5000', '2023-09-02', 'Turkey', NULL, '1', NULL, 6, 13, 0),
 (9, 'nece bed', 'nice and comfortable bed', '5005', '2023-09-02', 'Egypt', NULL, '3', NULL, 6, 17, 0),
@@ -113,8 +138,7 @@ INSERT INTO `users` (`id`, `username`, `password`, `email`, `fullname`, `group_i
 (15, 'hossam', '388ad1c312a488ee9e12998fe097f2258fa8d5ee', 'hoss@ex.com', 'hossam', 0, 0, 0, '2023-08-19'),
 (16, 'mahmoud', 'b94906ed9ea0e26f71304dcf715974cbf20d9242', 'ex@ex.com', 'mahmoud ahmed', 0, 0, 1, '2023-08-20'),
 (17, 'barakat', 'a7ead894957420aac12ad9f8253447fda897a7c1', 'kota10441@gmail.com', 'Mohamed Barakat', 0, 0, 1, '2023-08-20'),
-(18, 'mahmoudbarakat', 'e3683ff1c668a792eb012eee1ce32a08b6eb6861', 'mahamed@gamil.com', 'Mahamed Barakat', 0, 0, 0, '2023-08-20'),
-(19, 'hols hals', '7c4a8d09ca3762af61e59520943dc26494f8941b', 'hals@ex.com', 'hals tahles hsllas', 0, 0, 0, '2023-08-27');
+(18, 'mahmoudbarakat', 'e3683ff1c668a792eb012eee1ce32a08b6eb6861', 'mahamed@gamil.com', 'Mahamed Barakat', 0, 0, 0, '2023-08-20');
 
 --
 -- Indexes for dumped tables
@@ -126,6 +150,14 @@ INSERT INTO `users` (`id`, `username`, `password`, `email`, `fullname`, `group_i
 ALTER TABLE `cat`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `name` (`name`);
+
+--
+-- Indexes for table `comments`
+--
+ALTER TABLE `comments`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `c1` (`item_id`),
+  ADD KEY `c2` (`user_id`);
 
 --
 -- Indexes for table `items`
@@ -152,6 +184,12 @@ ALTER TABLE `cat`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
+-- AUTO_INCREMENT for table `comments`
+--
+ALTER TABLE `comments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
@@ -161,11 +199,18 @@ ALTER TABLE `items`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'for user identify', AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'for user identify', AUTO_INCREMENT=19;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `comments`
+--
+ALTER TABLE `comments`
+  ADD CONSTRAINT `c1` FOREIGN KEY (`item_id`) REFERENCES `items` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `c2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `items`
